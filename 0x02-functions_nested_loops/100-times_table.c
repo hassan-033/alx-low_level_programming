@@ -1,3 +1,8 @@
+/*
+ * File: 100-times_table.c
+ * Auth: Brennan D Baraban
+ */
+
 #include "main.h"
 
 /**
