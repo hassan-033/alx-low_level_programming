@@ -3,7 +3,7 @@
  * Auth: Brennan D Baraban
  */
 
-#include "main.h"
+#include "main.c"
 
 /**
  * print_times_table - Prints the times table of the input,
