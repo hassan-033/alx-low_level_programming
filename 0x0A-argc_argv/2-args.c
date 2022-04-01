@@ -1,21 +1,20 @@
-include <stdio.h>
-#include <stdlib.h>
-/**
- * main - print all arguments of the program separated by new line.
- * @argc: argument count or size of arguments.
- * @argv: argument vector
- *
- * Return: always 0.
- */
-int main(int argc, char **argv)
-{
-	int number = 0;
+#include "main.h"
+#include <stdio.h>
 
-	while (number < argc)
-	{
-		printf("%s\n", *(argv + number));
-		number++;
-		(*argv)++;
-	}
-	return (0);
+/**
+ *main - Entry point
+ *@argc: count of the arguments supplied to the program
+ *@argv: array of pointers to the strings
+ *
+ *Return: 0
+ */
+
+int main(int argc, char *argv[])
+{
+int i;
+
+for (i = 0; i < argc; i++)
+printf("%s\n", argv[i]);
+
+return (0);
 }
