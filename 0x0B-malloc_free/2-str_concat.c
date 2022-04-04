@@ -3,50 +3,37 @@
 #include <stdlib.h>
 
 /**
- * str_concat - function that concatenates two strings.
- *              if NULL is passed, treat it as an empty string
- *              The function should return NULL on failure
+ * str_concat - concatenates two strings.
+ * @s1: first string to be copied
+ * @s2: second string to be copied
  *
- * @s1: This is the output string
- * @s2: This is the input string
- *
- * Return: The returned pointer should point to a newly allocated space in
- *         memory which contains the contents of s1, followed by the contents 
- *         of s2, and null terminated
+ * Return: newly allocated portion of memory containing s1 and s2
  */
-
 char *str_concat(char *s1, char *s2)
 {
-	int a, b;
-	char *s;
+	char *concat;
+	int s1_len = 0, s2_len = 0;
+	int i, j, size;
 
 	if (s1 == NULL)
-	{
 		s1 = "";
-	}
 	if (s2 == NULL)
-	{
 		s2 = "";
-	}
-	for (a = 0; s1[a] != '\0'; a++)
-	{
-	}
-	for (b = 0; s2[b] != '\0'; b++)
-	{
-	}
 
-	s = (char *)  malloc(((a + b) + 1) * sizeof(char));
+	while (s1[s1_len] != '\0')
+		s1_len++;
+	while (s2[s2_len] != '\0')
+		s2_len++;
 
-	if (s == NULL)
+	size = s1_len + s2_len;
+	concat = malloc(sizeof(char) * (size + 1));
+	if (concat == NULL)
 		return (NULL);
-	for (a = 0; s1[a] != '\0'; a++)
-	{
-		s[a] = s1[a];
-	}
-	for (b = 0; s2[b] != '\0'; b++)
-	{
-		s[a] = s2[b];
-		a++;
-	}
-	return (s);
+	for (i = 0; i < s1_len; i++)
+		concat[i] = s1[i];
+	for (j = 0; i < size && j < s2_len; i++, j++)
+		concat[i] = s2[j];
+	concat[i] = '\0';
+
+	return (concat);
 }
