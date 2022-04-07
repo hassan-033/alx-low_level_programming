@@ -1,56 +1,74 @@
-#include <stdlib.h>
 #include "main.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 /**
-* _strlen - calculate and return string length
-* @s: string
-* Return string length
-*/
+ * _strlen - returns the length of a string, modifed return
+ *
+ * @s: string to be measured
+ *
+ * Return: amount of chars in string, in this use unsigned int
+ */
 
-int _strlen(char *string)
+int _strlen(char *s)
 {
-	int i;
+	int length = 0;
 
-	for (i = 0; string[i] != '\0'; i++)
-		;
-	return (i);
+	for (; *s; s++)
+	{
+		length++;
+	}
+	return (length);
 }
 
 /**
- * string_nconcat - concatenate s1 and n bytes of s2; return ptr to string
- * @s1: string 1
- * @s2: string 2
- * @n: n bytes to concat from string 2
- * Return: pointer to concatenated string
+ * string_nconcat - concatenates two strings, result contains
+ * s1, followed by the first n bytes of s2, and null terminated
+ *
+ * @s1: first string copied
+ *
+ * @s2: second string copied
+ *
+ * @n: amount of bytes in s2 copied
+ *
+ * Return: pointer to the concatenated string, or NULL pointer
+ * if the function fails
  */
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *ptr;
-	int num, len, i, j;
+	int len1;
+	int len2;
+	int sign_n = n;
+	int i;
+	char *cnct;
 
-	num = n;
+	if (s1 == NULL)
+		len1 = 0;
+	else
+		len1 = _strlen(s1);
 
-	if (s1 == NULL) /* account for NULL strings */
-		s1 = "";
 	if (s2 == NULL)
-		s2 = "";
-	if (num < 0) /* account for negative n bytes */
+		len2 = 0;
+	else if (sign_n > _strlen(s2))
+		len2 = _strlen(s2);
+	else
+		len2 = n;
+
+	cnct = malloc(sizeof(char) * ((len1 + len2) + 1));
+
+	if (cnct == NULL)
 		return (NULL);
-	if (num >= _strlen(s2)) /* account for n too big */
-		num = _strlen(s2);
 
-	len = _strlen(s1) + num + 1; /* +1 to account for null pointer */
+	for (i = 0; i < len1; i++)
+	{
+		cnct[i] = s1[i];
+	}
+	for (i = 0; i < len2; i++)
+	{
+		cnct[len1 + i] = s2[i];
+	}
 
-	ptr = malloc(sizeof(*ptr) * len); /* malloc and check for error */
-	if (ptr == NULL)
-		return (NULL);
+	cnct[len1 + len2] = '\0';
 
-	for (i = 0; s1[i] != '\0'; i++) /* concat */
-		ptr[i] = s1[i];
-	for (j = 0; j < num; j++)
-		ptr[i + j] = s2[j];
-	ptr[i + j] = '\0';
-
-	return (ptr);
+	return (cnct);
 }
