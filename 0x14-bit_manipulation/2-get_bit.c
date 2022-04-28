@@ -1,15 +1,13 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * get bit at index
+ * get_bit - get bit at index
  * @n: number
- * @index: indev within binary number
- * Return: bit 0 0r 1, or -1 if error
+ * @index: index within binary number
+ * Return: bit 0 or 1, or -1 if error
  */
-
 int get_bit(unsigned long int n, unsigned int index)
-  {
+{
 	int bit;
 	unsigned int max_bits;
 
