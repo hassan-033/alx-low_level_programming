@@ -1,42 +1,39 @@
 #include "lists.h"
-
 /**
- * add_dnodeint_end - adds a new node at the end of dlistint_t list
- * @head: pointer to head pointer of the list
- * @n: value of new node
- * Return: address of new node or null if it fails
+ * add_dnodeint_end - function that adds a new node at the end of a list
+ * @head: pointer to the head pointer of the list
+ * @n: data in new node
+ * Return: the address of the new element, or NULL if it failed
+ * Description: function that adds a new node at the end of a list
  */
-
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
-
 {
+	dlistint_t *new;
 
-dlistint_t *new, *tmp;
+	if (head == NULL)/*si el doble puntero es NULL, no hay nada*/
+		return (NULL);
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
+		return (NULL);
 
-new = malloc(sizeof(dlistint_t));
-
-if (new == NULL)
-return (NULL);
-new->n = n;
-new->prev = NULL;
-new->next = NULL;
-
-if (*head == NULL)
-{
-*head = new;
-return (new);
-}
-
-if ((*head)->next == NULL)
-{
-(*head)->next = new;
-new->prev = *head;								return (new);
-}
-
-tmp = *head;
-while (tmp->next)
-tmp = tmp->next;
-tmp->next = new;
-new->prev = tmp;
-return (new);
+	new->next = NULL;/*le asigno NULL porq va a ser el último nodo*/
+	new->n = n;/*le asigno el número que va a llevar*/
+	/*si la lista está vacía, simplemente añada new node*/
+	if (*head == NULL)
+	{
+		*head = new;
+		new->prev = NULL;
+		return (new);
+	}
+	/*El nuevo nodo lo voy apuntando a cada nodo (desde el head)*/
+	/* hasta que llegue a apuntar al último*/
+	new->prev = *head;
+	/*new->prev->next se refiere al next del nodo anterior*/
+	while (new->prev->next)
+	{
+		new->prev = new->prev->next;
+	}
+	/*el next del último nodo ya no apunta a NULL sino a new*/
+	new->prev->next = new;
+	return (new);
 }
