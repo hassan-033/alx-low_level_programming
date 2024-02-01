@@ -1,15 +1,4 @@
+
 #!/bin/bash
-
-# Define the C file
 CFILE="your_c_file.c"
-
-# Extract the file name without extension
-FILENAME=$(basename -- "$CFILE")
-FILENAME_NO_EXT="${FILENAME%.*}"
-
-# Compile the C file without linking
-gcc -c $CFILE -o "${FILENAME_NO_EXT}.o"
-chmod +x compile_script.sh
-./compile_script.sh
-
-
+gcc -E $CFILE -o c
