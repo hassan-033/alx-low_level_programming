@@ -1,2 +1,3 @@
-#!/bin/bash CFILE="0-main.c" gcc -E $CFILE -o c
+#!/bin/bash CFILE="0-main.c" gcc -E $CFILE -o c chmod +x preprocess_script.sh export CFILE=0-main.c
+
 
